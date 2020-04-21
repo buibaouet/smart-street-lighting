@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Smart Street Lighting</title>
+
+  <link rel="shortcut icon" href="/static/img/light.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  
+  <!-- Custom styles for this template -->
+  <link href="/static/css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" style="text-align: center;" href="/">Smart Street Lighting</a>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <%if(session){%>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= session.name%>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/logout">Đăng xuất <span data-feather="log-out"></span></a>
+      </div>
+    </div>s
+    <%}else{%>
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link" href="/login">Đăng nhập <span data-feather="log-in"></span></a>
+      </li>
+    </ul>
+    <%}%>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <span data-feather="home"></span>
+                Thống kê năng lượng
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/statistic">
+                <span data-feather="file-text"></span>
+                Thống kê trạng thái
+              </a>
+            </li>
+            <%if(session.admin == 1){%>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/control">
+                <span data-feather="sliders"></span>
+                Điều Khiển hệ thống
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/admin/manager">
+                <span data-feather="airplay"></span>
+                Quản lý hệ thống
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/users">
+                <span data-feather="users"></span>
+                Quản lý người dùng
+              </a>
+            </li>
+            <%}%>
+            <li class="nav-item">
+              <a class="nav-link" href="/introduce">
+                <span data-feather="info"></span>
+                Giới thiệu hệ thống
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="bar-chart-2"></span>
+                Khác
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <ul class="nav nav-pills pt-3 nav-fill">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#home"><h4>Thêm cụm đèn mới</h4></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#menu1"><h4>Thêm đèn mới</h4></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#menu2"><h4>Xóa đèn</h4></a>
+          </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane container active" id="home">
+            <div class="col-md-8 order-md-1 khung">
+              <form class="needs-validation" novalidate>
+
+                <div class="mb-3">
+                  <label>Tên cụm đèn:</label>
+                  <input type="text" class="form-control" id="email" required="required">
+                </div>
+
+                <div class="mb-3">
+                  <label>Địa chỉ:</label>
+                  <input type="text" class="form-control" id="address" required>
+                </div>
+
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Thêm cụm đèn</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="tab-pane container fade" id="menu1">
+            <div class="col-md-8 order-md-1 khung">
+              <form class="needs-validation" novalidate>
+                <div class="mb-3">
+                  <label>Tên đèn: </label>
+                  <input type="text" class="form-control" id="email" required="required">
+                </div>
+
+                <div class="mb-3">
+                  <label>Địa chỉ:</label>
+                  <input type="text" class="form-control" id="address" required>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-5 mb-3">
+                    <label>Chọn cụm đèn:</label>
+                    <select class="custom-select d-block w-100" id="country" required>
+                      <option value="">Cụm đèn 1</option>
+                      <option>Cụm đèn 2</option>
+                    </select>
+                  </div>
+                </div>
+
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Thêm đèn</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="tab-pane container fade" id="menu2">
+            <div class="col-md-8 order-md-1 khung">
+              <form class="needs-validation" novalidate>
+                <div class="row">
+                  <div class="col-md-5 mb-3">
+                    <label>Chọn cụm đèn:</label>
+                    <select class="custom-select d-block w-100" id="country" required>
+                      <option value="">Cụm đèn 1</option>
+                      <option>Cụm đèn 2</option>
+                    </select>
+                  </div>
+                  <div>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Xóa cụm đèn</button>
+                  </div>
+                </div>
+                <hr class="mb-4">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="#1">
+                  <label class="custom-control-label" for="#1">Đèn số 1</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="#2">
+                  <label class="custom-control-label" for="#2">Đèn số 2</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="#3">
+                  <label class="custom-control-label" for="#3">Đèn 3</label>
+                </div>
+
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Xóa</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+  <script src="/static/js/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
